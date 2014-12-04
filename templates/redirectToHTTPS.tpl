@@ -1,0 +1,3 @@
+location / {
+	rewrite ^ https://$host$request_uri? permanent;
+}
