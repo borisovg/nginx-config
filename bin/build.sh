@@ -1,4 +1,4 @@
-#!/bin/bash
+!/bin/bash
 
 # Build nginx config file
 #
@@ -61,7 +61,7 @@ if [ $SSL -ne 3 ]; then
 		fi
 	fi
 
-	sed -i "s/%%IP%%/$HTTP_PORT/g" $TMPFILE
+	sed -i "s/%%HTTP_PORT%%/$HTTP_PORT/g" $TMPFILE
 fi
 
 if [ $SSL -gt 0 ]; then
