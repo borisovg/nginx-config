@@ -17,7 +17,7 @@ error_log /var/log/nginx/%%DOMAIN%%-error.log;
 
 index %%INDEX%%;
 
-root /srv/www/%%DOMAIN%%/public
+root /srv/www/%%DOMAIN%%;
 
 server_tokens off;
 
