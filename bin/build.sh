@@ -70,6 +70,11 @@ if [ $SSL -ne 3 ]; then
     else
 	    sed -i "s/%%HTTP_PORT%%/$HTTP_PORT/g" $TMPFILE
     fi
+
+    if [[ -f $DATA_DIR/nginx_local_http.conf ]]; then
+        CODE=$(insertAfterLine $TMPFILE $DATA_DIR/nginx_local_http.conf 'LOCAL http_tpl')
+		echo "$CODE" > $TMPFILE
+    fi
 fi
 
 if [ $SSL -gt 0 ]; then
@@ -86,6 +91,11 @@ if [ $SSL -gt 0 ]; then
 
     else
 	    sed -i "s/%%HTTPS_PORT%%/$HTTPS_PORT/g" $TMPFILE
+    fi
+
+    if [[ -f $DATA_DIR/nginx_local_https.conf ]]; then
+        CODE=$(insertAfterLine $TMPFILE $DATA_DIR/nginx_local_https.conf 'LOCAL https_tpl')
+		echo "$CODE" > $TMPFILE
     fi
 fi
 
