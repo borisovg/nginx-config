@@ -109,6 +109,9 @@ fi
 sed -i "s/%%IP%%/$IP/g" $TMPFILE
 sed -i "s/%%DOMAIN%%/$DOMAIN/g" $TMPFILE
 
+ROOT=$(sed -e 's/[\/&]/\\&/g' <<< $ROOT)
+sed -i "s/%%ROOT%%/$ROOT/g" $TMPFILE
+
 cd "$BASE_DIR/data/$DOMAIN"
 
 mkdir -p nginx

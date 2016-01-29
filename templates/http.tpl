@@ -8,7 +8,7 @@ error_log /var/log/nginx/%%DOMAIN%%-error.log;
 
 index %%INDEX%%;
 
-root /srv/www/%%DOMAIN%%;
+root %%ROOT%%;
 
 server_tokens off;
 

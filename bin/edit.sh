@@ -12,6 +12,7 @@ BASE_DIR=$(cd "$( dirname "${BASH_SOURCE[0]}" )" && cd .. && pwd)
 initEnv $BASE_DIR
 
 DOMAIN=${1:-}
+ROOT="/srv/www/$DOMAIN/public"
 SSL=0	# 0: no, 1: yes, 2: yes + redirect all, 3: only SSL
 PHP=0	# 0: no, 1: yes
 HTTP_PORT=80
@@ -36,6 +37,11 @@ cd "$BASE_DIR/data/$DOMAIN"
 TMPFILE=`mktemp /tmp/tmpfile.XXXXXX` || exit 1
 trap 'rm -f "$TMPFILE" >/dev/null 2>&1' 0
 trap "exit 2" 1 2 3 13 15
+
+echo "WWW Root [$ROOT]: "
+read LINE
+ROOT=${LINE:-$ROOT}
+echo "ROOT=$ROOT" >> $TMPFILE
 
 echo "Enable PHP?"
 echo -n "0: no, 1: yes [$PHP]:"
