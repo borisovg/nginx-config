@@ -1,7 +1,7 @@
 server {
 
 listen %%IP%%%%HTTPS_PORT%% ssl;
-server_name %%DOMAIN%%
+server_name %%DOMAIN%%;
 
 ssl on;
 ssl_certificate ssl/%%DOMAIN%%.pem;

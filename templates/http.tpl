@@ -1,7 +1,7 @@
 server {
 
 listen %%IP%%%%HTTP_PORT%%;
-server_name %%DOMAIN%%
+server_name %%DOMAIN%%;
 
 access_log /var/log/nginx/%%DOMAIN%%-access.log;
 error_log /var/log/nginx/%%DOMAIN%%-error.log;
