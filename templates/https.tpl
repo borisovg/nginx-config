@@ -1,7 +1,7 @@
 server {
 
 listen %%IP%%:%%HTTPS_PORT%% ssl spdy;
-server_name %%DOMAIN%% www.%%DOMAIN%%
+server_name %%DOMAIN%%
 
 ssl on;
 ssl_certificate ssl/%%DOMAIN%%-cert.pem;
