@@ -1,6 +1,6 @@
 server {
 
-listen %%IP%%:%%HTTPS_PORT%% ssl spdy;
+listen %%IP%%%%HTTPS_PORT%% ssl spdy;
 server_name %%DOMAIN%%
 
 ssl on;

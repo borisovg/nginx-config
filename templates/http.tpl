@@ -1,6 +1,6 @@
 server {
 
-listen %%IP%%:%%HTTP_PORT%%;
+listen %%IP%%%%HTTP_PORT%%;
 server_name %%DOMAIN%%
 
 access_log /var/log/nginx/%%DOMAIN%%-access.log;

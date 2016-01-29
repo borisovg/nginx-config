@@ -64,7 +64,12 @@ if [ $SSL -ne 3 ]; then
 		fi
 	fi
 
-	sed -i "s/%%HTTP_PORT%%/$HTTP_PORT/g" $TMPFILE
+    if [[ -n $IP ]]; then
+	    sed -i "s/%%HTTP_PORT%%/:$HTTP_PORT/g" $TMPFILE
+
+    else
+	    sed -i "s/%%HTTP_PORT%%/$HTTP_PORT/g" $TMPFILE
+    fi
 fi
 
 if [ $SSL -gt 0 ]; then
@@ -75,8 +80,13 @@ if [ $SSL -gt 0 ]; then
 		echo "$CODE" > $TMPFILE
 		sed -i "/LOCAL php_tpl/a fastcgi_param HTTPS on;" $TMPFILE
 	fi
+    
+    if [[ -n $IP ]]; then
+	    sed -i "s/%%HTTPS_PORT%%/:$HTTPS_PORT/g" $TMPFILE
 
-	sed -i "s/%%IP%%/$HTTP_PORT/g" $TMPFILE
+    else
+	    sed -i "s/%%HTTPS_PORT%%/$HTTPS_PORT/g" $TMPFILE
+    fi
 fi
 
 if [ $PHP -eq 1 ]; then
