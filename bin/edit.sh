@@ -49,10 +49,12 @@ read LINE
 SSL=${LINE:-$SSL}
 echo "SSL=$SSL" >> $TMPFILE
 
-echo -n "HTTP Port [$HTTP_PORT]: "
-read LINE
-HTTP_PORT=${LINE:-$HTTP_PORT}
-echo "HTTP_PORT=$HTTP_PORT" >> $TMPFILE
+if [ $SSL -ne 3 ]; then
+    echo -n "HTTP Port [$HTTP_PORT]: "
+    read LINE
+    HTTP_PORT=${LINE:-$HTTP_PORT}
+    echo "HTTP_PORT=$HTTP_PORT" >> $TMPFILE
+fi
 
 if [ $SSL -gt 0 ]; then
 	echo -n "HTTPS Port [$HTTPS_PORT]: "
