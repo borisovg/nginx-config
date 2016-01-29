@@ -23,9 +23,9 @@ if [ ! -e "$BASE_DIR/data/$DOMAIN" ]; then
 	exit 1
 fi
 
-cd "$BASE_DIR/data/$DOMAIN"
+DATA_DIR="$BASE_DIR/data/$DOMAIN"
 
-. config
+. $DATA_DIR/config
 
 TMPFILE=`mktemp /tmp/tmpfile.XXXXXX` || exit 1
 trap 'rm -f "$TMPFILE" >/dev/null 2>&1' 0
