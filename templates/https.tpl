@@ -4,9 +4,10 @@ listen %%IP%%%%HTTPS_PORT%% ssl;
 server_name %%DOMAIN%%
 
 ssl on;
-ssl_certificate ssl/%%DOMAIN%%-cert.pem;
-ssl_certificate_key ssl.private/%%DOMAIN%%-key.pem;
-ssl_ciphers 'AES256+EECDH:AES256+EDH';
+ssl_certificate ssl/%%DOMAIN%%.pem;
+ssl_certificate_key ssl.private/%%DOMAIN%%.pem;
+ssl_ciphers 'EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH';
+ssl_dhparam /etc/ssl/dhparam.pem;
 ssl_prefer_server_ciphers on;
 ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
 ssl_session_cache builtin:1000 shared:SSL:10m;
