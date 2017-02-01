@@ -22,6 +22,8 @@ root %%ROOT%%;
 
 server_tokens off;
 
+add_header X-Frame-Options "SAMEORIGIN";
+
 location ~ /\.ht {
 	deny all;
 }
