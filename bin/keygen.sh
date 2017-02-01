@@ -44,7 +44,7 @@ function newCSR {
 
 	if [ -n "$SUBJECT" ]; then
 		openssl req -new -out csr.pem -sha256 -key key.pem -subj "$SUBJECT"
-	
+
 	else
 		openssl req -new -out csr.pem -sha256 -key key.pem
 	fi
@@ -54,8 +54,8 @@ function makeCert {
 	echo -n "Certificate lifetime (in years) [1]: "
 	read LINE
 	local YEARS=${LINE:-1}
-	
-	openssl req -x509 -in csr.pem -out cert.pem -days $((YEARS*365)) -key key.pem 
+
+	openssl req -x509 -in csr.pem -out cert.pem -days $((YEARS*365)) -key key.pem
 }
 
 if [ -e ssl ]; then
@@ -73,7 +73,7 @@ if [ -e ssl ]; then
 			newKey $CONFIG_SSL_KEY_LENGTH
 			newCSR "$CSR_SUBJECT"
 			break
-		
+
 		elif [ $LINE -eq 2 ]; then
 			makeCert
 			break

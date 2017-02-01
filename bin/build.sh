@@ -52,15 +52,20 @@ cd "$BASE_DIR/templates"
 
 if [ $SSL -ne 3 ]; then
 	cat http.tpl >> $TMPFILE
-	
+
 	if [ $SSL -eq 2 ]; then
 		CODE=$(insertAfterLine $TMPFILE redirectToHTTPS.tpl 'LOCAL http_tpl')
 		echo "$CODE" > $TMPFILE
-	
+
 	else
 		if [ $PHP -eq 1 ]; then
-			CODE=$(insertAfterLine $TMPFILE php.tpl 'LOCAL http_tpl')
+			CODE=$(insertAfterLine $TMPFILE php_http.tpl 'LOCAL http_tpl')
 			echo "$CODE" > $TMPFILE
+
+            if [[ -f $DATA_DIR/nginx_local_php_http.conf ]]; then
+                CODE=$(insertAfterLine $TMPFILE $DATA_DIR/nginx_local_php_http.conf 'LOCAL php_http_tpl')
+                echo "$CODE" > $TMPFILE
+            fi
 		fi
 	fi
 
@@ -80,12 +85,6 @@ fi
 if [ $SSL -gt 0 ]; then
 	cat https.tpl >> $TMPFILE
 
-	if [ $PHP -eq 1 ]; then
-		CODE=$(insertAfterLine $TMPFILE php.tpl 'LOCAL https_tpl')
-		echo "$CODE" > $TMPFILE
-		sed -i "/LOCAL php_tpl/a fastcgi_param HTTPS on;" $TMPFILE
-	fi
-    
     if [[ -n $IP ]]; then
 	    sed -i "s/%%HTTPS_PORT%%/:$HTTPS_PORT/g" $TMPFILE
 
@@ -97,6 +96,16 @@ if [ $SSL -gt 0 ]; then
         CODE=$(insertAfterLine $TMPFILE $DATA_DIR/nginx_local_https.conf 'LOCAL https_tpl')
 		echo "$CODE" > $TMPFILE
     fi
+
+	if [ $PHP -eq 1 ]; then
+		CODE=$(insertAfterLine $TMPFILE php_https.tpl 'LOCAL https_tpl')
+		echo "$CODE" > $TMPFILE
+
+        if [[ -f $DATA_DIR/nginx_local_php_https.conf ]]; then
+            CODE=$(insertAfterLine $TMPFILE $DATA_DIR/nginx_local_php_https.conf 'LOCAL php_https_tpl')
+            echo "$CODE" > $TMPFILE
+        fi
+	fi
 fi
 
 if [ $PHP -eq 1 ]; then
@@ -116,4 +125,4 @@ cd "$BASE_DIR/data/$DOMAIN"
 
 mkdir -p nginx
 
-cat $TMPFILE > nginx/nginx.conf 
+cat $TMPFILE > nginx/nginx.conf

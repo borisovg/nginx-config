@@ -67,11 +67,11 @@ if [ $SSL -gt 0 ]; then
 	read LINE
 	HTTPS_PORT=${LINE:-$HTTPS_PORT}
 	echo "HTTPS_PORT=$HTTPS_PORT" >> $TMPFILE
-	
+
 	if [ -n "$CSR_SUBJECT" ]; then
 		echo "CSR subject string [$CSR_SUBJECT]: "
 
-	else 
+	else
 		echo "CSR subject string (e.g. /C=UK/L=London/O=My Company/CN=$DOMAIN []: "
 	fi
 	read LINE
