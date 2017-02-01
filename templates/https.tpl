@@ -1,6 +1,7 @@
 server {
 
 listen %%IP%%%%HTTPS_PORT%% ssl;
+listen [%%IPv6%%]:%%HTTPS_PORT%% ssl;
 server_name %%DOMAIN%%;
 
 ssl on;

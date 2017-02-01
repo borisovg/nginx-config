@@ -115,6 +115,18 @@ else
 	sed -i "s/%%INDEX%%/index.html/g" $TMPFILE
 fi
 
+IPv6=${IPv6:-}
+if [ -n "$IPv6" ]; then
+    sed -i "s/%%IPv6%%/$IPv6/g" $TMPFILE
+
+else
+    sed -i "/%%IPv6%%/d" $TMPFILE
+fi
+
+if [ -n "$IP" ]; then
+    IP="$IP:"
+fi
+
 sed -i "s/%%IP%%/$IP/g" $TMPFILE
 sed -i "s/%%DOMAIN%%/$DOMAIN/g" $TMPFILE
 
